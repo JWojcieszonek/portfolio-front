@@ -1,6 +1,7 @@
 {
   "name": "front",
   "version": "0.1.0",
+  "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -8,9 +9,13 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
+    "ra-data-json-server": "^3.8.4",
     "react": "^16.13.1",
+    "react-admin": "^3.8.4",
     "react-dom": "^16.13.1",
     "react-responsive-carousel": "^3.2.9",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-slideshow-image": "^3.2.0",
     "reactstrap": "^8.5.1"

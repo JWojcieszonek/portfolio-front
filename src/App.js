@@ -1,50 +1,38 @@
 import React, { Component }from 'react';
 import axios from 'axios'
-import {Carousel} from 'react-responsive-carousel'
-import {Table} from 'reactstrap';
+import { Admin, Resource, EditGuesser } from "react-admin";
+import jsonServerProvider from 'ra-data-json-server' 
+import {Navigation} from './Navigation';
+import {MyCarousel} from './Carousel';
+import {PhotoList} from './photos'
 
 class App extends Component{
 
-
   state = {
-    photos: []
+    images: []
   }
-  componentWillMount(){
-    axios.get('http://localhost:8080/photos/all').then((response) =>{
+
+  componentDidMount(){
+    axios.get('http://localhost:8080/photos').then((response) =>{
       this.setState({
-        photos: response.data
+        images: response.data
       })
     });
   }
-  render(){
-    let photos = this.state.photos.map((photo) =>{
-      return(
-        <tr key={photo.photoid}>
-          <td>{photo.photoid}</td>
-          <td>{photo.title}</td>
-          <td>{photo.description}</td>
-          <td>
-          <img src={`http://127.0.0.1:8887/${photo.filename} `}/>
-          </td>
-      </tr>
-      )
-    });
-    return (
-      <div className="App container">
-      <Table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Image</th>
-          </tr>
-        </thead>
-        <tbody>
-         {photos}
-        </tbody>
 
-      </Table>
+  render(){
+    return(
+      <div className='app'>
+        <Admin dataProvider={jsonServerProvider('http://localhost:8080')}>
+          <Resource 
+          name="photos" 
+          list={PhotoList}
+          edit={EditGuesser}
+          />
+        </Admin>
+        <Navigation/>
+        <MyCarousel />
+        
       </div>
     );
   }
